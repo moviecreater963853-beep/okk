@@ -1155,11 +1155,11 @@
       </div>
       <div class="ci-row">
         <div class="ci-ico">📧</div>
-        <div><div class="ci-p">Email</div><div class="ci-v">ayush@formic-os.com</div></div>
+        <div><div class="ci-p">Email</div><div class="ci-v">ayushmishra5130tm@gmail.com</div></div>
       </div>
       <div class="ci-row">
         <div class="ci-ico">💬</div>
-        <div><div class="ci-p">WhatsApp</div><div class="ci-v">+91 99999 99999</div></div>
+        <div><div class="ci-p">WhatsApp</div><div class="ci-v">+91 8657877578</div></div>
       </div>
       <div class="ci-row">
         <div class="ci-ico">🕐</div>
@@ -1238,8 +1238,8 @@
       <h4>Contact</h4>
       <ul>
         <li><a href="#contact">Book a Call</a></li>
-        <li><a href="mailto:ayush@formic-os.com">ayush@formic-os.com</a></li>
-        <li><a href="https://wa.me/919999999999" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="mailto:ayushmishra5130tm@gmail.com">ayushmishra5130tm@gmail.com</a></li>
+        <li><a href="https://wa.me/918657877578" target="_blank" rel="noopener">WhatsApp</a></li>
         <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
         <li><a href="#" target="_blank" rel="noopener">Twitter / X</a></li>
       </ul>
@@ -1275,17 +1275,34 @@
   });
 
   // ── CONTACT FORM ──
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    const form = document.getElementById('contact-form');
     const btn = document.getElementById('submit-btn');
     btn.textContent = 'Sending...';
     btn.disabled = true;
 
-    // Simulate submission (replace with Formspree action when live)
-    setTimeout(() => {
-      document.getElementById('contact-form').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    }, 1200);
+    try {
+      const response = await fetch("https://formspree.io/f/xdaylodw", {
+        method: "POST",
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      if (response.ok) {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        alert("Oops! There was a problem submitting your form");
+        btn.textContent = 'Book Free Strategy Call →';
+        btn.disabled = false;
+      }
+    } catch (error) {
+      alert("Oops! There was a problem submitting your form");
+      btn.textContent = 'Book Free Strategy Call →';
+      btn.disabled = false;
+    }
   }
 
   // ── COUNTER ANIMATION ──
