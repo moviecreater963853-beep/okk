@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORMIC-OS — AI Automation Agency</title>
+<meta name="description" content="FORMIC-OS builds custom AI agents and automation systems that restructure your business operations. Save 10+ hours/week with intelligent AI employees that never sleep.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --green: #7fc41e;
+    --green-dark: #5a8f0f;
+    --green-glow: rgba(127,196,30,0.15);
+    --dark: #1a1d20;
+    --darker: #0f1113;
+    --darkest: #080a0b;
+    --card: #1e2226;
+    --border: rgba(127,196,30,0.15);
+    --text: #e8edf2;
+    --muted: #6b7785;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--darkest);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; width:100%; z-index:1000;
+    background: rgba(8,10,11,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items:center; justify-content:space-between;
+    height: 72px;
+    transition: background 0.3s;
+  }
+
+  .nav-brand {
+    display: flex; align-items:center; gap:12px;
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .nav-logo img { width:100%; height:100%; object-fit:cover; }
+
+  .nav-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: 1px;
+  }
+
+  .nav-name span { color: var(--green); }
+
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    transition: color .2s;
+  }
+
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-cta {
+    background: var(--green);
+    color: #0f1113;
+    border: none; padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px; font-weight: 700;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: .3px;
+    transition: background .2s, transform .15s;
+  }
+
+  .nav-cta:hover { background: #6fb018; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(127,196,30,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(127,196,30,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(127,196,30,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; max-width: 860px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(127,196,30,0.08);
+    border: 1px solid rgba(127,196,30,0.25);
+    color: var(--green);
+    padding: 7px 18px; border-radius: 30px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeInDown 0.6s ease both;
+  }
+
+  .hero-badge-dot {
+    width: 7px; height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity:1; transform:scale(1); }
+    50% { opacity:.5; transform:scale(0.7); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity:0; transform: translateY(-16px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity:0; transform: translateY(20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    color: #fff;
+    margin-bottom: 24px;
+    animation: fadeInUp 0.7s ease 0.1s both;
+  }
+
+  .hero h1 .green { color: var(--green); }
+  .hero h1 .outline {
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 580px;
+    margin: 0 auto 44px;
+    line-height: 1.75;
+    font-weight: 400;
+    animation: fadeInUp 0.7s ease 0.2s both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 14px;
+    justify-content: center; flex-wrap: wrap;
+    margin-bottom: 64px;
+    animation: fadeInUp 0.7s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: #0f1113;
+    padding: 14px 32px;
+    border-radius: 8px; border: none;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer; text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: background .2s, transform .15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #6fb018; transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    padding: 14px 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    font-size: 15px; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: border-color .2s, transform .15s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: rgba(127,196,30,0.4); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--border);
+    animation: fadeInUp 0.7s ease 0.4s both;
+  }
+
+  .h-stat {
+    background: rgba(30,34,38,0.8);
+    padding: 24px 20px;
+    text-align: center;
+    transition: background 0.25s;
+  }
+
+  .h-stat:hover { background: rgba(127,196,30,0.06); }
+
+  .h-stat-n {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .h-stat-l {
+    font-size: 12px; color: var(--muted);
+    font-weight: 500; letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: rgba(127,196,30,0.06);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    overflow: hidden;
+  }
+
+  .ticker-track {
+    display: flex; gap: 48px;
+    white-space: nowrap;
+    animation: ticker 30s linear infinite;
+  }
+
+  .ticker-track:hover { animation-play-state: paused; }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .t-item {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600;
+    color: var(--muted); letter-spacing: .5px;
+  }
+
+  .t-item .dot { color: var(--green); font-size: 18px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 5%; }
+
+  .s-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(127,196,30,0.06);
+    border: 1px solid rgba(127,196,30,0.2);
+    color: var(--green);
+    font-size: 11px; font-weight: 700;
+    padding: 5px 14px; border-radius: 20px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .s-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 700; color: #fff;
+    letter-spacing: -1.5px; margin-bottom: 14px;
+    line-height: 1.1;
+  }
+
+  .s-sub {
+    font-size: 16px; color: var(--muted);
+    max-width: 520px; line-height: 1.7;
+  }
+
+  .s-head { text-align: center; margin-bottom: 60px; }
+  .s-head .s-sub { margin: 0 auto; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--darker); }
+
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--border);
+  }
+
+  .svc-card {
+    background: var(--card);
+    padding: 36px 28px;
+    transition: background .25s;
+    cursor: default;
+  }
+
+  .svc-card:hover { background: rgba(127,196,30,0.05); }
+
+  .svc-ico {
+    width: 52px; height: 52px;
+    background: rgba(127,196,30,0.08);
+    border: 1px solid rgba(127,196,30,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    transition: background 0.25s, transform 0.2s;
+  }
+
+  .svc-card:hover .svc-ico { background: rgba(127,196,30,0.14); transform: scale(1.05); }
+
+  .svc-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px; font-weight: 600;
+    color: #fff; margin-bottom: 10px;
+  }
+
+  .svc-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ── HOW IT WORKS ── */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    position: relative;
+  }
+
+  .how-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.3s;
+  }
+
+  .how-card:hover { transform: translateY(-4px); border-color: rgba(127,196,30,0.35); }
+
+  .how-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 2px;
+    background: var(--green);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  .how-card:hover::before { opacity: 1; }
+
+  .how-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 56px; font-weight: 700;
+    color: rgba(127,196,30,0.08);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .how-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px; font-weight: 600;
+    color: #fff; margin-bottom: 10px;
+  }
+
+  .how-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ── ABOUT / FOUNDER ── */
+  .about { background: var(--darker); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  .about-visual { position: relative; }
+
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .about-card:hover { border-color: rgba(127,196,30,0.35); }
+
+  .about-card::after {
+    content: '';
+    position: absolute; bottom:-60px; right:-60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(127,196,30,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .founder-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(127,196,30,0.1);
+    border: 2px solid var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--green);
+    margin-bottom: 20px;
+  }
+
+  .founder-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: #fff; margin-bottom: 4px;
+  }
+
+  .founder-title {
+    font-size: 13px; color: var(--green);
+    font-weight: 600; letter-spacing: .5px;
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+
+  .founder-bio {
+    font-size: 15px; color: var(--muted);
+    line-height: 1.8; margin-bottom: 24px;
+  }
+
+  .founder-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .f-tag {
+    background: rgba(127,196,30,0.08);
+    border: 1px solid rgba(127,196,30,0.2);
+    color: var(--green);
+    font-size: 12px; font-weight: 600;
+    padding: 4px 12px; border-radius: 20px;
+    letter-spacing: .3px;
+    transition: background 0.2s;
+  }
+
+  .f-tag:hover { background: rgba(127,196,30,0.16); }
+
+  .about-text h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700; color: #fff;
+    letter-spacing: -1.5px; margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  .about-text h2 span { color: var(--green); }
+
+  .about-text p {
+    font-size: 16px; color: var(--muted);
+    line-height: 1.8; margin-bottom: 16px;
+  }
+
+  .about-feats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-top: 28px;
+  }
+
+  .af {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: rgba(127,196,30,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px;
+    transition: border-color 0.2s;
+  }
+
+  .af:hover { border-color: rgba(127,196,30,0.3); }
+
+  .af-check {
+    width: 20px; height: 20px;
+    background: rgba(127,196,30,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--green);
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  .af p {
+    font-size: 13px; color: var(--text);
+    font-weight: 500; margin: 0; line-height: 1.4;
+  }
+
+  /* ── RESULTS ── */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 32px 28px;
+    transition: border-color .25s, transform .2s;
+  }
+
+  .result-card:hover {
+    border-color: rgba(127,196,30,0.4);
+    transform: translateY(-4px);
+  }
+
+  .r-metric {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 48px; font-weight: 700;
+    color: var(--green); line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .r-label {
+    font-size: 13px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1px;
+    font-weight: 600; margin-bottom: 16px;
+  }
+
+  .r-desc { font-size: 15px; color: var(--text); line-height: 1.7; }
+
+  .r-tag {
+    display: inline-block;
+    background: rgba(127,196,30,0.08);
+    color: var(--green);
+    font-size: 11px; font-weight: 700;
+    padding: 4px 10px; border-radius: 6px;
+    letter-spacing: .5px; margin-bottom: 16px;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testi { background: var(--darker); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .testi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    transition: transform .2s, border-color 0.25s;
+  }
+
+  .testi-card:hover { transform: translateY(-3px); border-color: rgba(127,196,30,0.3); }
+
+  .t-quote-mark {
+    font-size: 40px; color: var(--green);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: .8; margin-bottom: 14px;
+    opacity: .5;
+  }
+
+  .t-quote {
+    font-size: 15px; color: #b0b9c6;
+    line-height: 1.8; margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .t-author { display: flex; align-items: center; gap: 12px; }
+
+  .t-av {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px; font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .av1 { background: rgba(127,196,30,0.15); color: var(--green); }
+  .av2 { background: rgba(79,195,247,0.15); color: #4fc3f7; }
+  .av3 { background: rgba(255,183,77,0.15); color: #ffb74d; }
+
+  .t-name { font-size: 14px; font-weight: 700; color: #fff; }
+  .t-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .ci h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px; font-weight: 700;
+    color: #fff; letter-spacing: -1px;
+    line-height: 1.2; margin-bottom: 16px;
+  }
+
+  .ci h3 span { color: var(--green); }
+
+  .ci p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
+
+  .ci-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .ci-ico {
+    width: 46px; height: 46px;
+    background: rgba(127,196,30,0.08);
+    border: 1px solid rgba(127,196,30,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .ci-row:hover .ci-ico { background: rgba(127,196,30,0.14); }
+
+  .ci-p { font-size: 11px; color: var(--muted); letter-spacing: 1px; font-weight: 700; margin-bottom: 2px; text-transform: uppercase; }
+  .ci-v { font-size: 15px; font-weight: 600; color: var(--text); }
+
+  .form-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+  }
+
+  .form-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: #fff; margin-bottom: 6px;
+  }
+
+  .form-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+
+  .form-row { display: flex; flex-direction: column; gap: 14px; }
+
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 13px 16px;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    transition: border-color .2s, background 0.2s;
+    width: 100%;
+  }
+
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus {
+    border-color: rgba(127,196,30,0.4);
+    background: rgba(127,196,30,0.03);
+  }
+
+  .form-row input::placeholder,
+  .form-row textarea::placeholder { color: var(--muted); }
+
+  .form-row select option { background: var(--darker); color: var(--text); }
+  .form-row textarea { height: 100px; resize: none; }
+
+  .form-submit {
+    background: var(--green);
+    color: #0f1113;
+    border: none; padding: 14px;
+    border-radius: 10px;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer; width: 100%;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: .3px;
+    transition: background .2s, transform 0.15s;
+  }
+
+  .form-submit:hover { background: #6fb018; transform: translateY(-1px); }
+
+  /* ── SUCCESS MESSAGE ── */
+  #form-success {
+    display: none;
+    background: rgba(127,196,30,0.1);
+    border: 1px solid rgba(127,196,30,0.3);
+    border-radius: 10px;
+    padding: 16px;
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--green);
+    padding: 72px 5%;
+    text-align: center;
+  }
+
+  .cta-band h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 5vw, 54px);
+    font-weight: 700;
+    color: #0f1113;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .cta-band p {
+    font-size: 18px; color: rgba(0,0,0,0.6);
+    max-width: 500px; margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+
+  .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .cta-dark {
+    background: #0f1113;
+    color: #fff;
+    padding: 14px 36px;
+    border-radius: 8px; border: none;
+    font-size: 16px; font-weight: 700;
+    cursor: pointer; text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: opacity 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .cta-dark:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .cta-wh {
+    background: transparent;
+    color: #0f1113;
+    padding: 14px 36px;
+    border-radius: 8px;
+    border: 2px solid rgba(0,0,0,0.25);
+    font-size: 16px; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .cta-wh:hover { border-color: rgba(0,0,0,0.5); transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--darkest);
+    border-top: 1px solid var(--border);
+    padding: 56px 5% 32px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-logo-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .footer-logo-img {
+    width: 38px; height: 38px;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .footer-logo-img img { width:100%; height:100%; object-fit:cover; }
+
+  .footer-logo-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 700;
+    color: #fff; letter-spacing: 1px;
+  }
+
+  .footer-logo-name span { color: var(--green); }
+
+  .footer-desc { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 280px; }
+
+  .footer-col h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: #fff; text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 18px;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+
+  .footer-col ul li a {
+    font-size: 14px; color: var(--muted);
+    text-decoration: none; transition: color .2s;
+  }
+
+  .footer-col ul li a:hover { color: var(--green); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+
+  .footer-copy { font-size: 13px; color: var(--muted); }
+  .footer-tag { font-size: 13px; color: var(--green); font-weight: 600; }
+
+  /* ── SCROLL TO TOP ── */
+  #scrollTop {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 44px; height: 44px;
+    background: var(--green);
+    color: #0f1113;
+    border: none; border-radius: 50%;
+    font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    z-index: 999;
+    font-weight: 700;
+  }
+
+  #scrollTop.visible { opacity: 1; transform: translateY(0); }
+  #scrollTop:hover { background: #6fb018; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .about-feats { grid-template-columns: 1fr; }
+    section { padding: 72px 5%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SCROLL TO TOP -->
+<button id="scrollTop" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">
+      <img src="https://res.cloudinary.com/doql3qnhx/image/upload/f_auto,q_auto/FOEMIC_h7so6j" alt="FORMIC-OS Logo" />
+    </div>
+    <div class="nav-name">FORMIC<span>-OS</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Call →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      AI Automation Agency — India
+    </div>
+    <h1>
+      Build <span class="green">AI Employees</span><br>
+      For Your <span class="outline">Business</span>
+    </h1>
+    <p class="hero-sub">
+      FORMIC-OS builds custom AI agents and automation systems that restructure your business operations. Save 10+ hours/week with intelligent AI employees that never sleep.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get Free Consultation →</a>
+      <a href="#how" class="btn-outline">See How It Works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat"><div class="h-stat-n">10+</div><div class="h-stat-l">Hours Saved/Week</div></div>
+      <div class="h-stat"><div class="h-stat-n">50+</div><div class="h-stat-l">Clients Automated</div></div>
+      <div class="h-stat"><div class="h-stat-n">3x</div><div class="h-stat-l">Avg ROI</div></div>
+      <div class="h-stat"><div class="h-stat-n">24/7</div><div class="h-stat-l">AI Always On</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="t-item"><span class="dot">✦</span> AI Agent Development</span>
+    <span class="t-item"><span class="dot">✦</span> Workflow Automation</span>
+    <span class="t-item"><span class="dot">✦</span> CRM Integration</span>
+    <span class="t-item"><span class="dot">✦</span> Lead Generation AI</span>
+    <span class="t-item"><span class="dot">✦</span> Customer Support Bots</span>
+    <span class="t-item"><span class="dot">✦</span> Data Processing</span>
+    <span class="t-item"><span class="dot">✦</span> Email Automation</span>
+    <span class="t-item"><span class="dot">✦</span> Social Media AI</span>
+    <span class="t-item"><span class="dot">✦</span> AI Agent Development</span>
+    <span class="t-item"><span class="dot">✦</span> Workflow Automation</span>
+    <span class="t-item"><span class="dot">✦</span> CRM Integration</span>
+    <span class="t-item"><span class="dot">✦</span> Lead Generation AI</span>
+    <span class="t-item"><span class="dot">✦</span> Customer Support Bots</span>
+    <span class="t-item"><span class="dot">✦</span> Data Processing</span>
+    <span class="t-item"><span class="dot">✦</span> Email Automation</span>
+    <span class="t-item"><span class="dot">✦</span> Social Media AI</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="s-head">
+    <div class="s-label">✦ What We Build</div>
+    <h2 class="s-title">AI Systems That<br>Replace Repetitive Work</h2>
+    <p class="s-sub">We build custom AI agents tailored to your specific business workflows — no generic solutions.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="svc-ico">🤖</div>
+      <h3>AI Sales Agents</h3>
+      <p>Automated lead qualification, follow-ups, and outreach that works 24/7 without human intervention.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico">⚡</div>
+      <h3>Workflow Automation</h3>
+      <p>Connect your tools and eliminate manual data entry. Build end-to-end automated pipelines instantly.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico">💬</div>
+      <h3>AI Customer Support</h3>
+      <p>Intelligent chatbots that understand context, resolve tickets, and escalate when needed — automatically.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico">📊</div>
+      <h3>Data Intelligence</h3>
+      <p>AI-powered reporting, insights extraction, and decision-making dashboards from your existing data.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico">📧</div>
+      <h3>Email & Outreach AI</h3>
+      <p>Personalized email sequences, automated follow-ups, and smart inbox management at scale.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico">🔗</div>
+      <h3>CRM Integration</h3>
+      <p>Seamlessly connect AI agents to your CRM, automate data sync, and keep your pipeline always updated.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background: var(--darkest);">
+  <div class="s-head">
+    <div class="s-label">✦ The Process</div>
+    <h2 class="s-title">From Zero to Automated<br>in 4 Simple Steps</h2>
+    <p class="s-sub">We handle everything — from discovery to deployment. You focus on growth, we handle the automation.</p>
+  </div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <h3>Discovery Call</h3>
+      <p>We analyze your current workflows, identify bottlenecks, and map out the highest ROI automation opportunities for your business.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <h3>Custom Strategy</h3>
+      <p>We design a tailored AI automation blueprint specific to your tools, team, and business goals — no cookie-cutter solutions.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <h3>Build & Deploy</h3>
+      <p>Our team builds and tests your AI systems, then deploys them live. Full integration with your existing tech stack.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">04</div>
+      <h3>Monitor & Optimize</h3>
+      <p>We continuously monitor performance, optimize agents, and scale as your business grows. Ongoing support included.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / FOUNDER -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="about-card">
+        <div class="founder-avatar">AM</div>
+        <div class="founder-name">Ayush Mishra</div>
+        <div class="founder-title">Founder & CEO — FORMIC-OS</div>
+        <p class="founder-bio">
+          Ayush Mishra is an AI automation specialist and entrepreneur with a passion for building intelligent systems that transform how businesses operate. He founded FORMIC-OS to make enterprise-grade AI accessible to every business — from startups to established companies.
+        </p>
+        <div class="founder-tags">
+          <span class="f-tag">AI Automation</span>
+          <span class="f-tag">n8n Expert</span>
+          <span class="f-tag">Make.com</span>
+          <span class="f-tag">Python</span>
+          <span class="f-tag">LLM Engineering</span>
+          <span class="f-tag">Business Strategy</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="s-label">✦ About FORMIC-OS</div>
+      <h2>We Don't Just Build Bots.<br>We Build <span>AI Employees.</span></h2>
+      <p>FORMIC-OS is an AI automation agency founded on one belief — that every business deserves the power of intelligent automation, regardless of size or budget.</p>
+      <p>Named after the Formic ant — nature's most efficient collective intelligence — we build AI systems that work together seamlessly, just like a colony, to drive your business forward 24/7.</p>
+      <div class="about-feats">
+        <div class="af"><div class="af-check">✓</div><p>Custom AI Agents built for your exact workflow</p></div>
+        <div class="af"><div class="af-check">✓</div><p>No-code & code solutions — we handle it all</p></div>
+        <div class="af"><div class="af-check">✓</div><p>Full integration with 200+ popular tools</p></div>
+        <div class="af"><div class="af-check">✓</div><p>Ongoing support & continuous optimization</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" style="background: var(--darkest);">
+  <div class="s-head">
+    <div class="s-label">✦ Client Results</div>
+    <h2 class="s-title">Real Numbers, Real Impact</h2>
+    <p class="s-sub">What happens when your business runs on AI automation — consistently, every single day.</p>
+  </div>
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="r-tag">TIME SAVED</div>
+      <div class="r-metric">40hrs</div>
+      <div class="r-label">Per Week Automated</div>
+      <p class="r-desc">A logistics client automated their entire order processing pipeline — saving 40 hours of manual work every single week.</p>
+    </div>
+    <div class="result-card">
+      <div class="r-tag">LEAD GENERATION</div>
+      <div class="r-metric">8x</div>
+      <div class="r-label">More Leads Qualified</div>
+      <p class="r-desc">AI sales agent qualified 8x more leads than their human team, running 24/7 without any additional payroll cost.</p>
+    </div>
+    <div class="result-card">
+      <div class="r-tag">COST REDUCTION</div>
+      <div class="r-metric">65%</div>
+      <div class="r-label">Operational Cost Cut</div>
+      <p class="r-desc">An e-commerce brand reduced operational costs by 65% by automating customer support, inventory, and reporting systems.</p>
+    </div>
+    <div class="result-card">
+      <div class="r-tag">RESPONSE TIME</div>
+      <div class="r-metric">&lt;2min</div>
+      <div class="r-label">Customer Response</div>
+      <p class="r-desc">AI customer support deployed in under 48 hours, reducing average response time from 4 hours to under 2 minutes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="s-head">
+    <div class="s-label">✦ Client Testimonials</div>
+    <h2 class="s-title">What Our Clients Say</h2>
+    <p class="s-sub">Businesses that trusted FORMIC-OS to build their AI workforce</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="t-quote-mark">"</div>
+      <p class="t-quote">Ayush and the FORMIC-OS team completely transformed our sales process. Our AI agent now qualifies leads 24/7 and books calls directly into our calendar. Revenue increased 40% in the first month.</p>
+      <div class="t-author">
+        <div class="t-av av1">RK</div>
+        <div><div class="t-name">Rohit Kapoor</div><div class="t-role">CEO, TechStartup India</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="t-quote-mark">"</div>
+      <p class="t-quote">We were spending 30 hours a week on manual data entry. FORMIC-OS built an automation that does it all in seconds. Ayush's expertise in AI is genuinely world-class. Best investment we made.</p>
+      <div class="t-author">
+        <div class="t-av av2">PS</div>
+        <div><div class="t-name">Priya Shah</div><div class="t-role">Operations Director, E-commerce Co.</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="t-quote-mark">"</div>
+      <p class="t-quote">Our customer support AI handles 80% of tickets automatically now. Response times went from hours to minutes. The ROI was clear within the first two weeks. Highly recommend FORMIC-OS.</p>
+      <div class="t-author">
+        <div class="t-av av3">AM</div>
+        <div><div class="t-name">Aditya Mehta</div><div class="t-role">Founder, SaaS Platform</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background: var(--darker);">
+  <div class="s-head">
+    <div class="s-label">✦ Get Started</div>
+    <h2 class="s-title">Ready to Automate<br>Your Business?</h2>
+    <p class="s-sub">Book a free strategy call. We'll identify your biggest automation opportunities in 30 minutes.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="ci">
+      <h3>Let's Build Your<br><span>AI Workforce</span></h3>
+      <p>Tell us about your business and we'll create a custom AI automation roadmap — completely free, no obligation.</p>
+      <div class="ci-row">
+        <div class="ci-ico">👤</div>
+        <div><div class="ci-p">Founder</div><div class="ci-v">Ayush Mishra</div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-ico">📧</div>
+        <div><div class="ci-p">Email</div><div class="ci-v">ayush@formic-os.com</div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-ico">💬</div>
+        <div><div class="ci-p">WhatsApp</div><div class="ci-v">+91 99999 99999</div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-ico">🕐</div>
+        <div><div class="ci-p">Response Time</div><div class="ci-v">Within 2 hours</div></div>
+      </div>
+    </div>
+    <div class="form-box">
+      <div class="form-title">Book Free Strategy Call</div>
+      <div class="form-sub">Takes 2 minutes. No spam. Just results.</div>
+      <form id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input type="text" id="name" name="name" placeholder="Your Full Name" required />
+          <input type="email" id="email" name="email" placeholder="Business Email" required />
+          <input type="text" id="company" name="company" placeholder="Company / Business Name" required />
+          <select id="service" name="service" required>
+            <option value="">What do you need automated?</option>
+            <option value="Sales & Lead Generation">Sales & Lead Generation</option>
+            <option value="Customer Support">Customer Support</option>
+            <option value="Workflow & Operations">Workflow & Operations</option>
+            <option value="Data & Reporting">Data & Reporting</option>
+            <option value="Email & Marketing">Email & Marketing</option>
+            <option value="Full Business Automation Audit">Full Business Automation Audit</option>
+          </select>
+          <textarea id="message" name="message" placeholder="Describe your biggest time-consuming task or workflow..." required></textarea>
+          <button type="submit" class="form-submit" id="submit-btn">Book Free Strategy Call →</button>
+        </div>
+      </form>
+      <div id="form-success">✓ We got your message! Expect a reply within 2 hours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Stop Hiring.<br>Start Automating.</h2>
+  <p>Join 50+ businesses that replaced repetitive work with FORMIC-OS AI employees. Your first consultation is free.</p>
+  <div class="cta-btns">
+    <a href="#contact" class="cta-dark">Get Started Today</a>
+    <a href="#services" class="cta-wh">View Our Services</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-row">
+        <div class="footer-logo-img">
+          <img src="https://res.cloudinary.com/doql3qnhx/image/upload/f_auto,q_auto/FOEMIC_h7so6j" alt="FORMIC-OS" />
+        </div>
+        <div class="footer-logo-name">FORMIC<span>-OS</span></div>
+      </div>
+      <p class="footer-desc">Building AI employees for ambitious businesses. Automation that works 24/7 so you don't have to.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">AI Sales Agents</a></li>
+        <li><a href="#services">Workflow Automation</a></li>
+        <li><a href="#services">Customer Support AI</a></li>
+        <li><a href="#services">Data Intelligence</a></li>
+        <li><a href="#services">CRM Integration</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#results">Case Studies</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#contact">Book a Call</a></li>
+        <li><a href="mailto:ayush@formic-os.com">ayush@formic-os.com</a></li>
+        <li><a href="https://wa.me/919999999999" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Twitter / X</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 FORMIC-OS. All rights reserved. Built by Ayush Mishra.</p>
+    <p class="footer-tag">AI Automation Agency — India 🇮🇳</p>
+  </div>
+</footer>
+
+<script>
+  // ── SCROLL TO TOP BUTTON ──
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // ── ACTIVE NAV LINK ──
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 100) current = sec.id;
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === '#' + current
+        ? 'var(--green)'
+        : 'var(--muted)';
+    });
+  });
+
+  // ── CONTACT FORM ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    // Simulate submission (replace with Formspree action when live)
+    setTimeout(() => {
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }, 1200);
+  }
+
+  // ── COUNTER ANIMATION ──
+  function animateCounters() {
+    document.querySelectorAll('.h-stat-n').forEach(el => {
+      const target = el.textContent;
+      el.dataset.target = target;
+    });
+  }
+
+  // ── INTERSECTION OBSERVER FOR FADE-IN ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.svc-card, .how-card, .result-card, .testi-card, .af').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
